@@ -15,6 +15,7 @@ MongoDB como fonte de eventos e Redis como camada de serving, aplicado ao caso d
 Radar Combustível.
   
 
+
 📦 **Escopo e Entregáveis**  
 A solução contempla os seguintes componentes:    
  - Modelagem do caso Radar Combustível, com entidades, eventos e consultas coerentes;  
