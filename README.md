@@ -13,7 +13,6 @@ do **MBA em Tecnologia – FIAP**.
 Projetar e implementar, em grupo, um pipeline de dados em tempo quase real utilizando
 MongoDB como fonte de eventos e Redis como camada de serving, aplicado ao caso da plataforma
 Radar Combustível. <br><br>
-<br><br>
 
 📦 **Escopo e Entregáveis**  
 A solução contempla os seguintes componentes:    
