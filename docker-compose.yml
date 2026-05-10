@@ -1,0 +1,79 @@
+version: "3.9"
+
+# =====================================================================
+# Radar Combustivel - Pipeline streaming MongoDB -> Redis
+# ---------------------------------------------------------------------
+# - mongo: replica set rs0 (necessario para Change Streams)
+# - mongo-init: inicializa o replica set automaticamente
+# - redis: Redis Stack 7.4 (RediSearch + RedisTimeSeries + RedisJSON)
+# - redis-insight: UI opcional para inspecionar o Redis
+# =====================================================================
+
+services:
+
+  mongo:
+    image: mongo:7.0
+    container_name: radar-mongo
+    restart: unless-stopped
+    command:
+      - "--replSet"
+      - "rs0"
+      - "--bind_ip_all"
+      - "--wiredTigerCacheSizeGB"
+      - "1.5"
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ping:1}).ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mongo-init:
+    image: mongo:7.0
+    container_name: radar-mongo-init
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: "no"
+    entrypoint:
+      - bash
+      - -c
+      - |
+        echo "Inicializando replica set rs0..."
+        mongosh --host mongo:27017 --eval '
+          try {
+            rs.status();
+            print("Replica set ja inicializado.");
+          } catch (e) {
+            rs.initiate({
+              _id: "rs0",
+              members: [{ _id: 0, host: "mongo:27017" }]
+            });
+            print("Replica set inicializado.");
+          }
+        '
+
+  redis:
+    image: redis/redis-stack:7.4.0-v0
+    container_name: radar-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"   # Redis
+      - "8001:8001"   # RedisInsight embarcado
+    volumes:
+      - redis-data:/data
+    environment:
+      # ~1.5GB de cache; suficiente para 100k docs + indices + timeseries
+      REDIS_ARGS: "--maxmemory 1500mb --maxmemory-policy allkeys-lru --appendonly yes"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  mongo-data:
+  redis-data:
