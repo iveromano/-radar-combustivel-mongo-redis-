@@ -146,8 +146,9 @@ pip install -r requirements.txt
 ```bash
 python init/seed.py --drop 
 
-# popula Mongo (500k docs em 125 cidades e coordenadas reais)
 ```
+Popula Mongo (500k docs em 125 cidades e coordenadas reais)
+
 ### 4.6 Criar índices RediSearch
 
 ```bash
@@ -198,8 +199,8 @@ Acesse `http://localhost:8501`. As cinco abas (Visão geral, Preços, Mapa & Geo
 ```bash
 python init/insert_test_avaliacoes.py
 
-# insere novos documentos de avaliações para um determinado posto, pegar o status da tela de avaliações e visão geral antes e rodar algumas vezes, ver o reflexo das alterações nestas telas do dashboard carregado pelo terminal 3 e no mongodb_consumer.py no terminal 1. Esse teste  também pode ser realizado inserindo documentos diretamente no mongodb.
 ```
+Insere novos documentos de avaliações para um determinado posto, pegar o status da tela de avaliações e visão geral antes e rodar algumas vezes, ver o reflexo das alterações nestas telas do dashboard carregado pelo terminal 3 e no mongodb_consumer.py no terminal 1. Esse teste  também pode ser realizado inserindo documentos diretamente no mongodb.
 ---
 
 ## 6. Estruturas Redis adotadas
