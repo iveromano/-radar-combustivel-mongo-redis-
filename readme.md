@@ -201,8 +201,8 @@ python init/insert_test_avaliacoes.py
 
 ```
 Insere novos documentos de avaliações para um determinado posto, pegar o status da tela de avaliações e visão geral antes e rodar algumas vezes, ver o reflexo das alterações nestas telas do dashboard carregado pelo terminal 3 e no mongodb_consumer.py no terminal 1. Esse teste  também pode ser realizado inserindo documentos diretamente no mongodb.
----
 
+---
 ## 6. Estruturas Redis adotadas
 
 | Estrutura | Chave | Por que escolhemos |
