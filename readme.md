@@ -1,4 +1,4 @@
-# Radar Combustivel — Pipeline Streaming MongoDB → Redis
+# Radar Combustível — Pipeline Streaming MongoDB → Redis
 
 > **MBA FIAP em Tecnologia | Banco de Dados In-Memory**
 > Caso de uso: **Plataforma Radar Combustivel** (preços, postos, buscas e avaliações)
