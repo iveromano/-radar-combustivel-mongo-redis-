@@ -478,10 +478,3 @@ The `maxmemory 1.5GB` setting in docker-compose leaves ~4× headroom for growth 
 
 ---
 
-## 8. Suggested future evolution
-
-- **UF sharding on search rankings**: if neighborhood cardinality explodes, split into `rank:buscas:bairro:SP`, `rank:buscas:bairro:RJ`, etc.
-- **RedisJSON** for `posto:{id}:rating` with a CAS expression on the average, removing the recompute step outside the pipeline.
-- **Stream consumer groups** (XADD/XREADGROUP) to distribute processing across multiple parallel consumers.
-- **Bitmap** for hourly opening presence of each station (24×7 = 168 bits per station) — basis for "is this station typically open now?".
-- **HyperLogLog** to estimate unique users per UF/city without storing all UUIDs.
